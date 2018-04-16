@@ -3,7 +3,6 @@
 class Scheduler
   # matrix to find best solution
   class Matrix
-
     # @param duration [Integer] target duration
     def initialize(duration)
       @maximum_duration = duration
@@ -39,25 +38,29 @@ class Scheduler
       @duration_variations ||= 1..maximum_duration
     end
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def add_line(meeting)
       new_line = [empty_cell]
 
       duration_variations.each do |intermediate_duration|
+        solution_with_same_duration = current_line[intermediate_duration]
         if meeting.duration > intermediate_duration
-          new_line.push(current_line[intermediate_duration])
+          new_line.push(solution_with_same_duration)
           next
         end
 
-        if current_line[intermediate_duration].duration > current_line[intermediate_duration - meeting.duration].duration + meeting.duration
-          new_line.push(current_line[intermediate_duration])
+        solution_with_smaller_duration = current_line[intermediate_duration - meeting.duration]
+        if solution_with_same_duration.duration > solution_with_smaller_duration.duration + meeting.duration
+          new_line.push(solution_with_same_duration)
         else
-          new_line.push(current_line[intermediate_duration - meeting.duration].add(meeting))
+          new_line.push(solution_with_smaller_duration.add(meeting))
         end
       end
 
       self.current_line = new_line
       solutions.push(current_line)
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def empty_cell
       Cell.empty

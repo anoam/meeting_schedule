@@ -27,6 +27,7 @@ class Schedule
     end
 
     private
+
     attr_reader :morning_meetings, :afternoon_meetings
   end
 

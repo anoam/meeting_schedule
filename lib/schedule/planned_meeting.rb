@@ -46,8 +46,7 @@ class Schedule
     end
 
     private
+
     attr_reader :meeting
-
   end
-
 end
