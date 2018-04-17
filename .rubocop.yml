@@ -8,7 +8,9 @@ Metrics/LineLength:
   Max: 120
 Style/Documentation:
   Enabled: false
-Rails:
-  Enabled: true
 Style/ClassAndModuleChildren:
+  Enabled: false
+Layout/IndentHeredoc:
+  Enabled: false
+Style/FormatStringToken:
   Enabled: false
