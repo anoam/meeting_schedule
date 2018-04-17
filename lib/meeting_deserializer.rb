@@ -18,7 +18,13 @@ class MeetingDeserializer
       data = MEETING_REGEXP.match(text_meeting)
       raise(InvalidData, 'invalid format') if data.nil?
 
-      Meeting.new(data[:title], data[:duration].to_i)
+      build_meeting(data[:title], data[:duration].to_i)
     end
+  end
+
+  private
+
+  def build_meeting(title, duration)
+    Meeting.new(title, duration)
   end
 end

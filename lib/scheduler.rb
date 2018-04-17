@@ -25,7 +25,7 @@ class Scheduler
     first_afternoon_meetings = extract_period(meetings, afternoon_session_duration)
     second_afternoon_meetings = meetings - first_afternoon_meetings
 
-    Schedule.new(first_morning_meetings, second_morning_meetings, first_afternoon_meetings, second_afternoon_meetings)
+    build_schedule(first_morning_meetings, second_morning_meetings, first_afternoon_meetings, second_afternoon_meetings)
   end
 
   private
@@ -54,5 +54,9 @@ class Scheduler
 
   def afternoon_session_duration
     Schedule::AFTERNOON_SESSION_DURATION
+  end
+
+  def build_schedule(first_morning_meetings, second_morning_meetings, first_afternoon_meetings, second_afternoon_meetings)
+    Schedule.new(first_morning_meetings, second_morning_meetings, first_afternoon_meetings, second_afternoon_meetings)
   end
 end
